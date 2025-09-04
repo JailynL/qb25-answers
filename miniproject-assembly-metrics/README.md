@@ -16,3 +16,12 @@ number of contings 3670 , total length 145442736 ,average length 39630.173297002
 - https://ftp.ebi.ac.uk/pub/databases/wormbase/parasite/releases/WBPS19/species/caenorhabditis_remanei/PRJNA577507/caenorhabditis_remanei.PRJNA577507.WBPS19.genomic.fa.gz
 The uncompressed file size is 127M
 number of contings 187 , total length 130480874 ,average length 697758.6844919786
+
+instructions on script: 
+1. Make sure that fasta.py is installed in the same working directory 
+2. My script is going to expect the contig file (in fasta form) in the same working directory as the python script. 
+3. Make sure to create a python script that will run the fasta form, and make sure to import sys and import fasta at the beginning of the python script. 
+
+example 
+% ./assembly-metrics.py caenorhabditis_remanei.PRJNA577507.WBPS19.genomic.fa
+
