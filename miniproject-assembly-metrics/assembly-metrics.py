@@ -5,23 +5,43 @@ import fasta
 my_file = open(sys.argv[1])
 contings = fasta.FASTAReader(my_file)
 
-i = 0
-lensum = 0 
-for ident, sequence in contings: #seq is letter 
-    i = i + 1 #counting the number of contigs 
-    lensum = lensum + len(sequence) #counting the number of total length 
-    avglegn = lensum / i  #counting the average length 
+#for mini project q4
+# i = 0
+# lensum = 0 
+# for ident, sequence in contings: #seq is letter 
+#     i = i + 1 #counting the number of contigs 
+#     lensum = lensum + len(sequence) #counting the number of total length 
+#     avglegn = lensum / i  #counting the average length 
 
-print(i)
-print(lensum)
-print(avglegn)
+# print(i)
+# print(lensum)
+# print(avglegn)
 
-print( f"number of contings", i,", total length",lensum,",average length", avglegn)
+# print( f"number of contings", i,", total length",lensum,",average length", avglegn)
+
+#The following code is for Mini Project #1 Q5
+contiglist = []
+contiglen = 0
+for ident, sequence in contings:
+    consize = len(sequence)
+    contiglist.append(consize)
+    contiglen = contiglen + consize
+print(f"the cumulative length thus far is",contiglen,)
+
+contiglist.sort(reverse= True)
 
 
-#my_file = open( sys.argv[1] )
-#contings = fasta.FASTAReader( my_file )
+length2= 0 
+for length in contiglist:
+    length2 = length2 + length
+    if length2 < (.5*contiglen):
+        continue
+    else: 
+        break 
+print(f"sequence length of the shortest contig at 50% of the total assembly length is",length,)
 
+
+#IGNORE THE FOLLOWING MATERIALS FROM LECTURE 
 #for conting in contings: #reads the conting through the fasta reader 
 #    print(contig[0])
 #for ident, sequence in assemblies:
