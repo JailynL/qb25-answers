@@ -1,5 +1,6 @@
 Q1 of project:
 # My Project
+Miniproject 1 for CMDB Quant Bio Course
 
 Q2 of project:
 - https://ftp.ebi.ac.uk/pub/databases/wormbase/parasite/releases/WBPS19/species/caenorhabditis_remanei/PRJNA248909/caenorhabditis_remanei.PRJNA248909.WBPS19.genomic.fa.gz
