@@ -34,22 +34,22 @@ View(dt)
 breaks_seq = breaks = seq(0, 100, 2)
 ggplot (dt, aes ( x = Liver)) +
   geom_histogram(breaks = breaks_seq, color = 'black', fill = 'pink') + 
-  scale_x_continuous(limits = c(0,30), breaks = seq(0,100,2)) +
+  scale_x_continuous(limits = c(0,100), breaks = seq(0,100,2)) +
   labs (
     x = "Liver",
     y = "Frequency of Genes",
     title = "Gene Expression in Liver (Histogram)"
-  )
+  ) + theme_classic()
 
 breaks_seq = breaks = seq(0, 100, 2)
 ggplot (dt, aes ( x = Ovary)) +
   geom_histogram(breaks = breaks_seq, color = 'black', fill = 'pink') + 
-  scale_x_continuous(limits = c(0,30), breaks = seq(0,100,2)) +
+  scale_x_continuous(limits = c(0,100), breaks = seq(0,100,2)) +
   labs (
     x = "Ovary",
     y = "Frequency of Genes",
     title = "Gene Expression in Ovary (Histogram)"
-  )
+  ) + theme_classic()
 
 # answer here
 #The distribution follows a positive skew pattern. This tells me that the relative expression of genes in the liver transcriptome are expressed at a low level. There are only a few genes showing higher levels of expression in the Liver. I repeated the same graph with the Ovary and saw the same pattern. Therefore, it does not seem like it's Liver tissue specific. 
@@ -70,7 +70,7 @@ d1p <- ggplot (dt, aes ( x = Liver)) +
     x = "Liver",
     y = "Density",
     title = "Gene Expression in Liver"
-  )
+  ) + theme_classic()
 
 d2p <- ggplot (dt, aes ( x = Liver + 1)) +
   geom_density(color = 'black', fill = 'pink') +
@@ -79,7 +79,7 @@ d2p <- ggplot (dt, aes ( x = Liver + 1)) +
     x = "Liver (Log 10 TPM + 1)",
     y = "Density",
     title = "Gene Expression in Liver"
-  )
+  ) + theme_classic()
 
 d1p
 d2p
@@ -102,8 +102,8 @@ ggplot (dt, aes ( x = Liver + 1, y =`Heart - Left Ventricle` + 1)) +
   labs (
     x = "Expression Genes in Liver (Log 10 TPM + 1)",
     y = "Expression Genes in Heart - Left Ventricle (Log 10 TPM + 1)",
-    title = "Gene Expression in Liver"
-  )
+    title = "Gene Expression in Liver" 
+  ) + theme_classic()
 ```
 
 ------------------------------------------------------------------------
@@ -113,8 +113,22 @@ ggplot (dt, aes ( x = Liver + 1, y =`Heart - Left Ventricle` + 1)) +
 Color the previous scatter plot points based on whether the genes are mitochondrial vs nuclear encoded. Note that the tidyverse function `str_starts()` can test whether a string starts with a specific pattern.
 
 ```{r q4}
-
 # answer here
+dt_exp <- dt %>%
+  mutate(is_mitochondrial = str_starts(Description,"MT-"))  %>%  group_by(is_mitochondrial)
+
+plot <- 
+ggplot (dt_exp, aes ( x = Liver + 1, y =`Heart - Left Ventricle` + 1, color = is_mitochondrial)) +
+  geom_point( size = 1, alpha = 0.2) + 
+  geom_abline(linetype = "dashed", intercept = 0, slope = 1, color = 'pink') +
+  scale_x_log10()+
+  scale_y_log10() + 
+  labs (
+    x = "Expression Genes in Liver (Log 10 TPM + 1)",
+    y = "Expression Genes in Heart - Left Ventricle (Log 10 TPM + 1)",
+    title = "Gene Expression in Liver") + theme_classic()
+
+plot
 ```
 
 ------------------------------------------------------------------------
@@ -130,9 +144,11 @@ focal_tissues <- c("Liver", "Testis", "Whole Blood", "Heart - Left Ventricle", "
 This requires first converting the data into "long" format with `pivot_longer()`:
 
 ```{r}
-dt_long <- dt %>%
+dt_long <- dt_exp %>%
   select("Description", "is_mitochondrial", all_of(focal_tissues)) %>%
   pivot_longer(cols = focal_tissues, names_to = "Tissue", values_to = "TPM")
+
+view(dt_long)
 ```
 
 After creating 5-panel plot, also split into two rows that separate genes that are versus are not encoded by the mitochondrial genome (10 panels). Use the argument `scales = "free_y"` to deal with the fact that there are far fewer mitochondrial-encoded than nuclear-encoded genes.
@@ -141,7 +157,30 @@ After creating 5-panel plot, also split into two rows that separate genes that a
 
 # your code for 5-panel plot
 
+cincoplot <- ggplot (dt_long , aes ( x = TPM)) +
+  geom_histogram(breaks = breaks_seq, color = 'pink', fill = 'pink') + 
+  scale_x_continuous(limits = c(0,100))+
+  facet_grid(.~Tissue, scales = "free_y") +
+  labs (
+    x = "Tissues",
+    y = "Frequency of Genes",
+    title = "Gene Expression in Focal Tissues (Histogram)"
+  ) + theme_classic()
+cincoplot
+
+
+
 # your code for 10-panel plot
+tenplot <- ggplot (dt_long , aes ( x = TPM)) +
+  geom_histogram(breaks = breaks_seq, color = 'pink', fill = 'pink') + 
+  scale_x_continuous(limits = c(0,100))+
+  facet_grid(is_mitochondrial~Tissue, scales = "free_y") +
+  labs (
+    x = "Tissues",
+    y = "Frequency of Genes",
+    title = "Gene Expression in Focal Tissues (Histogram)"
+  ) + theme_classic()
+tenplot
 ```
 
 ------------------------------------------------------------------------
