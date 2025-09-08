@@ -13,8 +13,6 @@ Note the arguments, which specify that the first two lines of the file will be s
 
 ```{r}
 library(tidyverse)
-getwd()
-setwd("/Users/cmdb/Desktop/bootcamp")
 dt <- read_delim("GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct.gz", skip = 2, col_names = TRUE, delim = '\t')
 ```
 
@@ -141,14 +139,14 @@ Which pair of tissues is more strongly correlated? Does this result make sense b
 
 ```{r}
 # Liver vs Heart answer
-#p-value < 2.2e-16, z = 241.7
+#p-value < 2.2e-16, z = 241.7, tau = 0.8053218 
 cor.test(dt$Liver, dt$`Heart - Left Ventricle`, method = "kendall")
 # Liver vs Brain answer
-#z = 223.7, p-value < 2.2e-16
+#z = 223.7, p-value < 2.2e-16 tau = 0.7342544 
 cor.test(dt$Liver, dt$`Brain - Cortex`, method = "kendall")
 # interpretation
 
-# The Liver and Heart are more strongly correlated since it has a z value of 241.7. This results make biological sense as both of these tissues play an important role in circulating blood and other physiological processes. 
+# The Liver and Heart are more strongly correlated since it has a tau value of 0.8053218, which is a higher tau value than the comparison between the Liver and Brain-cortex (0.7342544) . This results make biological sense as both of these tissues play an important role in circulating blood and other physiological processes. For example, the Liver plays an important role in cleaning the blood. 
 
 ```
 
