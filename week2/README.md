@@ -10,3 +10,7 @@ For marker chro1 at 27915, I do not see a difference across all of the 8 BAMS si
 at this specific marker location, same thing with marker 28323. However, when we look at this visulatization
 at a much larger scale (zoom out x3), we see different colors across the chromosome, indicating there
 are a lot of bases that differ from BY. 
+
+Excercise 4: 
+longreads % minimap2 -ax map-ont ~/qb25-answers/week2/genomes/sacCer3.fa ~/qb25-answers/week2/rawdata/ERR8562476.fastq > longreads.sam 
+
