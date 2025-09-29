@@ -1,3 +1,4 @@
+
 bowtie2-build sacCer3.fa sacCer3
 bowtie -p 4 -x ~/qb25-answers/week3/genomes/sacCer3 \ -U ~/Data/ByxRM/fastq/AO1_01.FQ.GZ -S A01_01.sam
 samtools sort -@ 4 -o A01_01.bam A01_01.sam
@@ -14,3 +15,5 @@ are a lot of bases that differ from BY.
 Excercise 4: 
 longreads % minimap2 -ax map-ont ~/qb25-answers/week2/genomes/sacCer3.fa ~/qb25-answers/week2/rawdata/ERR8562476.fastq > longreads.sam 
 
+Excercise 5:hisat2 -p 4 -x /Users/cmdb/qb25-answers/week2/genomes/sacCer3 -U SRR10143769.fastq -S rna.sam 
+The part of the gene that appears to have the most coverage is exon regions. 
