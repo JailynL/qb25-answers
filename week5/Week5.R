@@ -54,3 +54,12 @@ plot2 <- merged_data %>% pivot_longer(c(mother,father), names_to = "Parent_Type"
 plot2
 ggsave("/Users/cmdb/qb25-answers/week5/ex2_c.png", plot= plot2, width = 10, height = 15)
 
+#step 2.6 Stastistical test: maternal vs paternal DNMs per proband
+ttest <- t.test(merged_data$mother, merged_data$father, paired = TRUE)
+ttest
+
+#2.6 fitting model using lm()
+lmmodel <- lm(I(father - mother) ~ 1, data = merged_data) #looking at the difference between paternal and maternal DNMs there is not predictors in this case, rather only an intercept indicated by ~1 
+#I(father-mother) is computing the difference between the father and the mother... 
+summary(lmmodel)
+
