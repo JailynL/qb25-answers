@@ -13,3 +13,10 @@ T-test interpretation : There is about ~61 more paternal DNMa than maternal DNMS
 lm model: in this case, the intercept is reported as 45.2 which means the father contributes ~45 more DNMs than the mother per proband. Additionally, the P value is <2e-16 ***, extremely low, indicating this is a very significant difference. 
 
 Difference between models: From these results, I can say both tests models are equivalent to each other because we are looking at the difference between the two groups and how different it is from the zero point. 
+
+I will be doing step Week 5 Step 3.3 on the first graph I did. I want to see if 
+there is a relationship between budget and ratings of horror movies. I hypothesize the horror movies with a more expensive
+budget have a higher review rating. 
+
+According to the model, this model does not fit well. First, the R square is about 0.37% which means budget explains only 0.37% of the variation in review rating. 
+Aditionally, there is a 1.653 residual standard error meaning our predications are off quite a bit. Therefore, although the model works and the pvalue is below 0.05, it doesn't represent/explain the data well. However, based off this model, it suggest that horror movie budgets have a slight positive correlation with reivew raitings (but it's a vary small effect, that could be explained by other factors other than budget).
