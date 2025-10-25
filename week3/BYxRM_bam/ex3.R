@@ -11,7 +11,8 @@ plot1 <- ggplot(sampleofinterest, aes(x = as.numeric(pos), y = 0, color = genoty
   labs(title = "Sample A01_62 on chromosome chrII",
        x = "chrII position",
        y = "") +                          
-  theme_minimal()                    
+  theme_minimal()   
+ggsave("Q3.2.png", plot = plot1, width = 8, height = 8, dpi = 300)
 plot1
 
 #Q3.2 Do you notice any patterns? What do the transitions indicate?
@@ -31,5 +32,9 @@ plottingallchromosomes <- ggplot(data2, aes(x = as.numeric(pos), y = sample_id ,
        x = " position",
        y = "Sample ID") +                          
   theme_minimal()   
+ggsave("Q3.3.png", plot = plottingallchromosomes, width = 40, height = 25, dpi = 300)
+
+
 
 plottingallchromosomes
+
