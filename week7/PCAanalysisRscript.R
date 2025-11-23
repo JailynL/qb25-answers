@@ -5,11 +5,13 @@ library(ggplot2)
 DATA <- read.delim("/Users/cmdb/qb25-answers/week7/read_matrix.tsv", header = TRUE)
 View(DATA)
 datamatrix <- as.matrix(DATA)
+datamatrix[, c(12, 13)] <- datamatrix[, c(13, 12)]
 #View(datamatrix)
 #to check if it exisits withing a data matrix I can use %in%
 #"P2.4_Rep1" %in% colnames(datamatrix) #responds true, meaning it is a matrix
 #column name is the the tissue + replicate
 #rows are the genes 
+
 #help(rowSds) #standard deviation estimates for each row(column in a matrix)
 mostvaraiablegenes <- rowSds(datamatrix)
 sortedgenes <- order(mostvaraiablegenes, decreasing = TRUE)[1:500]
