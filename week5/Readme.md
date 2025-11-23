@@ -7,6 +7,9 @@ Step 2.3:
 Question 1: The slope for this linear model is 1.35, a postive yet steeper slope. This means that paternal DNMs increase roughly ~1.35 units every year of paternal age. Therefore, it does match our plot as our plot has a much faster postive slope (when compared to the mother plot)
 Question 2: Yes, it is significant. The p value is <2e-16 ***, which is very low. This means that the observations we are seeing most likely did not happen by chance, therefore, paternal age is a good predictor of paternal DNMs
 
+step 2.4:
+The prediction for the expected number of paternal DNMs for a 50.5 year old father is 78.69546 so ~79 DNMs. 
+
 Step 2.5:
 T-test interpretation : There is about ~61 more paternal DNMa than maternal DNMS per proband. Additionally, this test shows that difference between paternal and marternal DNMs are significantly different since the P value is p-value < 2.2e-16.In terms of the graph, the paternal number of DNMS is much higher than the maternal DNMs, corresponding to these values in the t-test. 
 

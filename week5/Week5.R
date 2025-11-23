@@ -4,15 +4,15 @@ library(ggplot2)
 
 #Exercise 1: Wrangle the Data 
 mutationdata <-read_csv("/Users/cmdb/qb25-answers/week5/aau1043_dnm.csv")
-View(mutationdata) 
+#View(mutationdata) 
 data <- mutationdata %>% filter (!is.na(Phase_combined)) #we want to remove rows with no information
-View(data) 
+#View(data) 
 datanew <- data %>% group_by(Proband_id, Phase_combined) %>% summarize( sample = n())%>% pivot_wider(names_from = Phase_combined, values_from = sample ) #counting the number of rows in the group and creating a column with that new count 
-View(datanew)
+#View(datanew)
 parentaldata <- read_csv("/Users/cmdb/qb25-answers/week5/aau1043_parental_age.csv")
-View(parentaldata)
+#View(parentaldata)
 merged_data <- merge(parentaldata, datanew, by = "Proband_id", all.x = TRUE) #all.x = TRUE allows for a left join meaning that all rows from the first table will be there  
-View(merged_data)
+#View(merged_data)
 
 #2.1 - visualize relationships
 #Maternal Plot
@@ -37,12 +37,13 @@ linearmodel <- lm(merged_data$mother ~ merged_data$Mother_age, data = merged_dat
 summary(linearmodel)
 
 #Step 2.3 OLS- paternal age vs paternal DNMs
-Paternallinearmodel <- lm(merged_data$father ~ merged_data$Father_age, data = merged_data) #first is the response variable vs predictor varaible)
+#first is the response variable vs predictor varaible)
+Paternallinearmodel <- lm(father ~ Father_age, data = merged_data)
 summary(Paternallinearmodel)
 
 #Step 2.4 Making predication 
-newpaternalpredication <- tibble(Father_age = 50.5)
-predict(Paternallinearmodel, newdata = newpaternalpredication)
+newpaternalprediction <- tibble(Father_age = 50.5)
+predict(Paternallinearmodel, newdata = newpaternalprediction)
 
 #step 2.5 Compare Distributions on maternal vs parental DNMs
 plot2 <- merged_data %>% pivot_longer(c(mother,father), names_to = "Parent_Type", values_to = "dnm_count") %>%
