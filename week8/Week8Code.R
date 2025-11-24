@@ -136,10 +136,14 @@ count
 #Exercise 3
 
 #copied code in live coding + filter 
-plot<- ggplot(data = mappinggenes, aes(x = log2FoldChange, y = -log10(padj))) +
-  geom_point(color = "pink") + geom_point(data =mappinggenes%>%filter(!is.na(padj) & padj <0.1 & abs(log2FoldChange) >1 ),
-aes(x = log2FoldChange, y = -log10(padj)), color = "black")
+plot <- ggplot(mappinggenes, aes(x = log2FoldChange, y = -log10(padj))) +
+  geom_point(aes(color = padj < 0.1 & abs(log2FoldChange) > 1)) +
+  scale_color_manual(values = c("FALSE" = "pink", "TRUE" = "black"),
+                     name = "Significant") +
+  theme_minimal()
+
 plot
+
 ggsave("volcanoplot.png", plot = plot, width = 10, height = 10)
 
 #in the graph, the pink points are accumulated at 0 the middle suggesting that most these genes are not being expressed differently across sex. 
