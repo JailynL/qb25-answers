@@ -74,7 +74,7 @@ clusterimage<- results$cluster[ordering] #clusrer labels for all genes
 #follow code live session
 png("heatmap.png", width = 800, height = 600)
 heatmap(as.matrix(filterorder),Rowv = NA,Colv = NA, RowSideColors = RColorBrewer::brewer.pal(12,"Paired")[clusterimage],ylab = "Gene")
-
+dev.off()
 #exercise 3 
 # use filtered data >sd1
 cluster1 <- rownames(filtersds)[results$cluster ==1]
